@@ -2,6 +2,9 @@
 
 An end-to-end machine learning decision-support system for identifying students at academic risk before final outcomes are known.
 
+![System Overview](docs/overview.png)
+![Risk Assessment Form](docs/assessment.png)
+
 The project goes beyond model accuracy by addressing four practical ML questions:
 
 * How early can academic risk be predicted?
