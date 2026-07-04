@@ -1,6 +1,6 @@
 # Student Academic Early Warning System
 
-![Dashboard Preview](reports/figures/dashboard.png)
+![Dashboard Preview](reports/figures/hero_image.png)
 
 An end-to-end machine learning decision-support system for identifying students at academic risk before final outcomes are known.
 
