@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Academic Early Warning System</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <div style="display: flex; align-items: center; margin-right: 40px; gap: 14px;">
+                    <div style="width: 10px; height: 10px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 12px var(--accent-green);"></div>
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; color: var(--text-main); line-height: 1.2;">ACADEMIC PULSE</div>
+                        <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Student Performance Prediction</div>
+                    </div>
+                </div>
+                <nav class="nav-menu">
+                    <button class="nav-item active" data-target="overview">Overview</button>
+                    <button class="nav-item" data-target="assessment">Assessment</button>
+                    <button class="nav-item" data-target="comparison">Comparison</button>
+                    <button class="nav-item" data-target="fairness">Fairness</button>
+                    <button class="nav-item" data-target="insights">Insights</button>
+                </nav>
+            </div>
+            <div class="top-bar-right">
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- Main Content Area -->
+            <main class="content">
+                
+                <!-- Overview Page -->
+                <section id="overview" class="page-section active">
+                    <div class="section-header">
+                        <h1>SYSTEM OVERVIEW</h1>
+                        <div class="header-filters">
+                            <button class="filter-btn">Date: Now v</button>
+                            <button class="filter-btn">Profile: All v</button>
+                        </div>
+                    </div>
+                    
+                    <div id="overview-content" class="cards-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                    
+                    <div class="tradeoff-box">
+                        <h3>OPERATIONAL TRADEOFF</h3>
+                        <p>This model prioritizes Recall (identifying as many at-risk students as possible for early intervention). Consequently, it flags more false positives (~54.7% FPR). Counselors must review flagged students using holistic context rather than treating flags as certainties.</p>
+                    </div>
+                </section>
+
+                <!-- Assessment Page -->
+                <section id="assessment" class="page-section">
+                    <div class="section-header">
+                        <h1>RISK ASSESSMENT</h1>
+                    </div>
+                    
+                    <!-- Form goes here, unchanged form fields just styled -->
+                    <form id="assessment-form" class="assessment-form">
+                        <div class="form-group"><label>Age</label><input type="number" name="age" value="15" min="10" max="30" required></div>
+                        <div class="form-group"><label>Sex</label><select name="sex"><option value="F">Female</option><option value="M">Male</option></select></div>
+                        <div class="form-group"><label>Address</label><select name="address"><option value="U">Urban</option><option value="R">Rural</option></select></div>
+                        <div class="form-group"><label>Family Size</label><select name="family_size"><option value="LE3">&le; 3</option><option value="GT3">&gt; 3</option></select></div>
+                        <div class="form-group"><label>Parents Cohab</label><select name="parents_cohabitation"><option value="T">Together</option><option value="A">Apart</option></select></div>
+                        <div class="form-group"><label>Mother's Ed</label><input type="number" name="mother_education" value="4" min="0" max="4" required></div>
+                        <div class="form-group"><label>Father's Ed</label><input type="number" name="father_education" value="4" min="0" max="4" required></div>
+                        <div class="form-group"><label>Mother's Job</label><select name="mother_job"><option value="teacher">Teacher</option><option value="health">Health</option><option value="services">Services</option><option value="at_home">At Home</option><option value="other">Other</option></select></div>
+                        <div class="form-group"><label>Father's Job</label><select name="father_job"><option value="teacher">Teacher</option><option value="health">Health</option><option value="services">Services</option><option value="at_home">At Home</option><option value="other">Other</option></select></div>
+                        <div class="form-group"><label>Study Time</label><input type="number" name="study_time" value="2" min="1" max="4" required></div>
+                        <div class="form-group"><label>Failures</label><input type="number" name="failures" value="0" min="0" max="4" required></div>
+                        <div class="form-group"><label>School Support</label><select name="school_support"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                        <div class="form-group"><label>Family Support</label><select name="family_support"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                        <div class="form-group"><label>Paid Classes</label><select name="paid_classes"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                        <div class="form-group"><label>Extra Activities</label><select name="extra_activities"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                        <div class="form-group"><label>Internet</label><select name="internet_access"><option value="yes">Yes</option><option value="no">No</option></select></div>
+                        <div class="form-group"><label>Romantic</label><select name="romantic_relationship"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                        <div class="form-group"><label>Free Time</label><input type="number" name="free_time" value="3" min="1" max="5" required></div>
+                        <div class="form-group"><label>Going Out</label><input type="number" name="going_out" value="2" min="1" max="5" required></div>
+                        <div class="form-group"><label>Weekday Alco</label><input type="number" name="weekday_alcohol" value="1" min="1" max="5" required></div>
+                        <div class="form-group"><label>Weekend Alco</label><input type="number" name="weekend_alcohol" value="1" min="1" max="5" required></div>
+                        <div class="form-group"><label>Health Status</label><input type="number" name="health_status" value="5" min="1" max="5" required></div>
+                        <div class="form-group"><label>Absences</label><input type="number" name="absences" value="0" min="0" max="93" required></div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Evaluate Risk</button>
+                        </div>
+                    </form>
+                    <div id="assessment-result" class="assessment-result" style="display:none;"></div>
+                </section>
+
+                <!-- Comparison Page -->
+                <section id="comparison" class="page-section">
+                    <div class="section-header">
+                        <h1>MODEL COMPARISON</h1>
+                    </div>
+                    <div id="comparison-content" class="cards-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Fairness Page -->
+                <section id="fairness" class="page-section">
+                    <div class="section-header">
+                        <h1>FAIRNESS AUDIT</h1>
+                    </div>
+                    <div id="fairness-content" class="table-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Insights Page -->
+                <section id="insights" class="page-section">
+                    <div class="section-header">
+                        <h1>MODEL INSIGHTS</h1>
+                    </div>
+                    <div id="insights-content" class="table-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
